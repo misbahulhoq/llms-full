@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun, Monitor, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -35,15 +35,21 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
+        {["light", "dark", "system"].map((value) => {
+          return (
+            <DropdownMenuItem
+              key={value}
+              onClick={() => setTheme(value)}
+              className={`capitalize ${theme === value && "bg-accent"}`}
+            >
+              {value === "light" && <Sun className="mr-2 h-4 w-4" />}
+              {value === "dark" && <Moon className="mr-2 h-4 w-4" />}
+              {value === "system" && <Monitor className="mr-2 h-4 w-4" />}
+              {value}
+              {theme === value && <Check />}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );

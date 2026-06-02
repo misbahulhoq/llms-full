@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Github, BookMarked, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -57,11 +58,17 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2 flex-shrink-0 group"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-600 text-white">
-              <BookMarked className="h-3.5 w-3.5" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-md">
+              <Image
+                src="/logo_transparent.svg"
+                alt="LLM Full"
+                height={50}
+                width={50}
+              />
             </div>
-            <span className="font-semibold text-sm tracking-tight">
-              LLM<span className="text-blue-600">Docs</span>
+
+            <span className="font-semibold text-lg tracking-tight">
+              LLM<span className="text-primary">Docs</span>
             </span>
           </Link>
 
@@ -109,15 +116,22 @@ export default function Navbar() {
               asChild
               variant="ghost"
               size="sm"
-              className="h-8 w-8 px-0 text-muted-foreground hover:text-foreground"
+              className="h-8 w-8 px-0 "
               aria-label="View source on GitHub"
             >
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="bg-background text-foreground"
               >
-                <Github className="h-4 w-4" />
+                <Image
+                  src="/icons/github.svg"
+                  alt="GitHub"
+                  height={20}
+                  width={20}
+                  className="h-5 w-5"
+                />
               </a>
             </Button>
 
