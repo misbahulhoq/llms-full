@@ -16,3 +16,9 @@ export function buildLLMUrl(llmId: LLMId, libName: string): string {
       return `https://claude.ai/new?q=${encodedPrompt}`;
   }
 }
+
+// Ask LLM about a library
+export const handleAsk = (selectedLLM: LLMId, libName: string) => {
+  const url = buildLLMUrl(selectedLLM, libName);
+  window.open(url, "_blank");
+};
