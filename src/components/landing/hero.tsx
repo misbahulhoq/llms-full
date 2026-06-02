@@ -4,8 +4,9 @@ import { Search } from "lucide-react";
 
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
+
   return (
-    <div className="text-center mb-8">
+    <section className="text-center mb-8">
       <div className="inline-flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 rounded-full px-3 py-1 mb-4">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
         <span>142 libraries · always up to date</span>
@@ -35,7 +36,7 @@ const HeroSection = () => {
           ⌘K
         </kbd>
       </div>
-    </div>
+    </section>
   );
 };
 
