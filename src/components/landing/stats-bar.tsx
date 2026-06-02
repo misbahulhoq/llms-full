@@ -5,10 +5,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
-import { LLMId } from ".";
+
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown } from "lucide-react";
-import { LLMS } from "@/lib/constants";
+import { LLMId, LLMS } from "@/lib/constants";
 
 // Stats data
 const stats = [
@@ -18,9 +18,15 @@ const stats = [
   { label: "Daily", value: "Updates" },
 ];
 
-const StatsBar = () => {
+type Props = {
+  selectedLLM: LLMId;
+  setSelectedLLM: (llmId: LLMId) => void;
+};
+
+const StatsBar = (props: Props) => {
+  const { selectedLLM, setSelectedLLM } = props;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedLLM, setSelectedLLM] = useState<LLMId>("claude");
+
   // Change LLM model
   const changeLLM = (llmId: LLMId) => {
     setSelectedLLM(llmId);

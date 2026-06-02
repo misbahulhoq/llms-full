@@ -4,40 +4,20 @@ import { useState, useEffect, useMemo } from "react";
 import { Copy, Check, MessageCircle } from "lucide-react";
 
 // shadcn/ui components
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import Footer from "@/components/layout/footer";
 import HeroSection from "./hero";
 import StatsBar from "./stats-bar";
-import { CATEGORIES, LLMS } from "@/lib/constants";
+import { Library, LLMId, LLMS, RecentItem } from "@/lib/constants";
+import { buildLLMUrl } from "@/lib/helpers";
+import CategoryFilter from "./category-filter";
+import LibrariesGrid from "./libraries-grid";
 
 // ============================================================================
-// Data & Types
+// Types
 // ============================================================================
-
-interface Library {
-  name: string;
-  desc: string;
-  version: string;
-  cat: string;
-  badge: "popular" | "new" | "stable";
-  bg: string;
-  fg: string;
-  ltr: string;
-}
-
-interface RecentItem {
-  name: string;
-  tag: string;
-  time: string;
-  bg: string;
-  fg: string;
-  ltr: string;
-}
-
-export type LLMId = (typeof LLMS)[number]["id"];
 
 const LIBRARIES: Library[] = [
   {
@@ -205,31 +185,6 @@ const RECENT_ITEMS: RecentItem[] = [
   },
 ];
 
-// ============================================================================
-// Helper Functions
-// ============================================================================
-
-function buildLLMUrl(llmId: LLMId, libName: string): string {
-  const prompt = `Using the documentation at https://llmdocs.com/docs/${libName.toLowerCase().replace(/\s/g, "-")}.md, help me understand and work with ${libName}.`;
-  const encodedPrompt = encodeURIComponent(prompt);
-  switch (llmId) {
-    case "claude":
-      return `https://claude.ai/new?q=${encodedPrompt}`;
-    case "chatgpt":
-      return `https://chatgpt.com/?q=${encodedPrompt}`;
-    case "gemini":
-      return `https://gemini.google.com/app?q=${encodedPrompt}`;
-    case "perplexity":
-      return `https://perplexity.ai/?q=${encodedPrompt}`;
-    default:
-      return `https://claude.ai/new?q=${encodedPrompt}`;
-  }
-}
-
-// ============================================================================
-// Main Component
-// ============================================================================
-
 export default function LandingPage() {
   const [searchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -278,8 +233,6 @@ export default function LandingPage() {
     window.open(url, "_blank");
   };
 
-  const currentLLM = LLMS.find((l) => l.id === selectedLLM)!;
-
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -287,127 +240,19 @@ export default function LandingPage() {
         <HeroSection />
 
         {/* Stats Bar with LLM Selector */}
-        <StatsBar />
+        <StatsBar selectedLLM={selectedLLM} setSelectedLLM={setSelectedLLM} />
 
         {/* Categories Filter */}
-        <div className="mb-5">
-          <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((cat) => {
-              const Icon = cat.icon;
-              const isActive = activeCategory === cat.id;
-
-              return (
-                <Button
-                  key={cat.id}
-                  variant={isActive ? "default" : "outline"}
-                  size="sm"
-                  className={`gap-1.5 rounded-full text-xs h-8 ${
-                    isActive
-                      ? "bg-blue-50 dark:bg-blue-950 text-blue-700 border-blue-200"
-                      : "border-foreground/30 text-gray-600"
-                  }`}
-                  onClick={() => setActiveCategory(cat.id)}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  {cat.name}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <CategoryFilter
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
 
         {/* Libraries Grid */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <h2 className="text-sm font-medium  ">Popular libraries</h2>
-              <p className="text-xs  ">Most asked this week</p>
-            </div>
-          </div>
-
-          {filteredLibraries.length === 0 ? (
-            <div className="text-center py-12 border border-dashed border-foreground/30  rounded-lg">
-              <p className="text-sm  ">
-                No libraries found.{" "}
-                <button
-                  className="text-blue-600  hover:underline"
-                  onClick={() => alert("Submit a library feature coming soon")}
-                >
-                  Submit it ↗
-                </button>
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {filteredLibraries.map((lib) => {
-                const isCopied = copiedLibName === lib.name;
-                return (
-                  <Card
-                    key={lib.name}
-                    className="group border border-gray-100  hover:border-foreground/30  transition-all"
-                  >
-                    <CardContent className="p-4 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div
-                          className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-medium"
-                          style={{ background: lib.bg, color: lib.fg }}
-                        >
-                          {lib.ltr}
-                        </div>
-                        <Badge
-                          variant="secondary"
-                          className={`text-[10px] px-2 py-0 ${
-                            lib.badge === "popular"
-                              ? "bg-emerald-50 text-emerald-700"
-                              : lib.badge === "new"
-                                ? "bg-primary/10 text-primary"
-                                : "bg-card text-card-foreground "
-                          }`}
-                        >
-                          {lib.badge}
-                        </Badge>
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-medium  ">{lib.name}</h3>
-                        <p className="text-xs   mt-1">{lib.desc}</p>
-                      </div>
-                      <div className="flex items-center justify-between pt-1">
-                        <span className="text-[11px] font-mono text-muted-foreground">
-                          {lib.version}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 pt-1">
-                        <Button
-                          size="sm"
-                          className="flex-1 h-8 gap-1.5"
-                          onClick={() => handleAsk(lib.name)}
-                        >
-                          <MessageCircle className="h-3.5 w-3.5" />
-                          Ask {currentLLM.name}
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-8 px-3 gap-1.5"
-                          onClick={() => handleCopy(lib.name)}
-                        >
-                          {isCopied ? (
-                            <Check className="h-3.5 w-3.5 text-accent" />
-                          ) : (
-                            <Copy className="h-3.5 w-3.5" />
-                          )}
-                          <span className="text-xs">
-                            {isCopied ? "Copied!" : "Copy"}
-                          </span>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        <LibrariesGrid
+          selectedLLM={selectedLLM}
+          filteredLibraries={filteredLibraries}
+        />
 
         {/* How it works */}
         <div className="mb-8">
