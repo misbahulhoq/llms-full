@@ -13,22 +13,22 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`[&::-webkit-scrollbar-thumb]:bg-foreground/25 bg-secondary/50 text-secondary-foreground overflow-y-auto py-3 lg:w-56 lg:py-5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full dark:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-track]:bg-transparent`}
+      className={`[&::-webkit-scrollbar-thumb]:bg-foreground/25 bg-secondary/50 text-secondary-foreground overflow-y-auto lg:w-56 lg:pb-5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full dark:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-track]:bg-transparent`}
     >
       <button
-        className="flex w-full items-center pl-6 md:hidden"
+        className="bg-secondary sticky top-0 z-10 flex w-full items-center justify-between px-6 py-3 md:hidden"
         onClick={() => setMenuOpen(!menuOpen)}
       >
-        Menu
+        <span>Menu</span>
         <ChevronRight
           size={20}
-          className={`ml-1 transform transition-transform duration-200 ${
+          className={`transform transition-transform duration-200 ${
             menuOpen ? "rotate-90" : ""
           }`}
         />
       </button>
 
-      <div className={`${menuOpen ? "block" : "hidden"} mt-7 md:block lg:mt-0`}>
+      <div className={`${menuOpen ? "block" : "hidden"} mt-4 md:block lg:mt-0`}>
         {libraries.map((library) => {
           const href = `/docs/${library.slug}`;
           const isActive = pathName === href;
@@ -36,7 +36,7 @@ const Sidebar = () => {
             <Link
               key={library.slug}
               href={href}
-              className={`my-1.5 block py-2 pl-6 ${
+              className={`my-1.5 block py-2 pr-6 pl-6 ${
                 isActive && "text-primary font-semibold"
               }`}
             >
