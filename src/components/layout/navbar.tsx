@@ -22,8 +22,8 @@ const ThemeToggle = dynamic(
   {
     ssr: false,
     loading: () => (
-      <Button variant="outline" size="icon" disabled className="w-9 h-9">
-        <span className="h-[1.2rem] w-[1.2rem] block" />
+      <Button variant="outline" size="icon" disabled className="h-9 w-9">
+        <span className="block h-[1.2rem] w-[1.2rem]" />
       </Button>
     ),
   },
@@ -52,13 +52,13 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header className="border-border/60 bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-14 items-center justify-between gap-4">
           {/* ── Logo ── */}
           <Link
             href="/"
-            className="flex items-center gap-2 flex-shrink-0 group"
+            className="group flex flex-shrink-0 items-center gap-2"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-md">
               <Image
@@ -69,14 +69,14 @@ export default function Navbar() {
               />
             </div>
 
-            <span className="font-semibold text-lg tracking-tight">
+            <span className="text-lg font-semibold tracking-tight">
               LLM<span className="text-primary">Docs</span>
             </span>
           </Link>
 
           {/* ── Desktop nav links ── */}
           <nav
-            className="hidden md:flex items-center gap-1"
+            className="hidden items-center gap-1 md:flex"
             aria-label="Main navigation"
           >
             {NAV_LINKS.map((link) => {
@@ -99,13 +99,13 @@ export default function Navbar() {
           </nav>
 
           {/* ── Right side actions ── */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex flex-shrink-0 items-center gap-2">
             {/* Submit a library */}
             <Button
               asChild
               variant="outline"
               size="sm"
-              className="hidden sm:flex h-8 gap-1.5 text-xs"
+              className="hidden h-8 gap-1.5 text-xs sm:flex"
             >
               <Link href="/submit">
                 <Plus className="h-3.5 w-3.5" />
@@ -118,7 +118,7 @@ export default function Navbar() {
               asChild
               variant="ghost"
               size="sm"
-              className="h-8 w-8 px-0 "
+              className="h-8 w-8 px-0"
               aria-label="View source on GitHub"
             >
               <a
@@ -142,7 +142,7 @@ export default function Navbar() {
 
             {/* Mobile hamburger */}
             <button
-              className="flex md:hidden h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="text-muted-foreground hover:text-foreground hover:bg-accent flex h-8 w-8 items-center justify-center rounded-md transition-colors md:hidden"
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-label="Toggle mobile menu"
               aria-expanded={mobileOpen}
@@ -151,7 +151,7 @@ export default function Navbar() {
               <div className="flex flex-col gap-1">
                 <span
                   className={cn(
-                    "block h-0.5 w-4 bg-current transition-transform origin-center",
+                    "block h-0.5 w-4 origin-center bg-current transition-transform",
                     mobileOpen && "translate-y-1.5 rotate-45",
                   )}
                 />
@@ -163,7 +163,7 @@ export default function Navbar() {
                 />
                 <span
                   className={cn(
-                    "block h-0.5 w-4 bg-current transition-transform origin-center",
+                    "block h-0.5 w-4 origin-center bg-current transition-transform",
                     mobileOpen && "-translate-y-1.5 -rotate-45",
                   )}
                 />
@@ -176,7 +176,7 @@ export default function Navbar() {
       {/* ── Mobile menu ── */}
       <div
         className={cn(
-          "md:hidden overflow-hidden transition-all duration-200 border-t border-border/40",
+          "border-border/40 overflow-hidden border-t transition-all duration-200 md:hidden",
           mobileOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0",
         )}
       >
@@ -203,7 +203,7 @@ export default function Navbar() {
           })}
           <Link
             href="/submit"
-            className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
+            className="text-muted-foreground hover:text-foreground hover:bg-accent/60 flex items-center gap-1.5 rounded-md px-3 py-2 text-sm transition-colors"
           >
             <Plus className="h-3.5 w-3.5" />
             Submit a library

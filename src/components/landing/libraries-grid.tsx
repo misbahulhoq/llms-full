@@ -22,19 +22,19 @@ const LibrariesGrid = (props: Props) => {
 
   return (
     <div className="mb-6">
-      <div className="flex items-center justify-between mb-3">
+      <div className="mb-3 flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-medium  ">Popular libraries</h2>
-          <p className="text-xs  ">Most asked this week</p>
+          <h2 className="text-sm font-medium">Popular libraries</h2>
+          <p className="text-xs">Most asked this week</p>
         </div>
       </div>
 
       {filteredLibraries.length === 0 ? (
-        <div className="text-center py-12 border border-dashed border-foreground/30  rounded-lg">
-          <p className="text-sm  ">
+        <div className="border-foreground/30 rounded-lg border border-dashed py-12 text-center">
+          <p className="text-sm">
             No libraries found.{" "}
             <button
-              className="text-blue-600  hover:underline"
+              className="text-blue-600 hover:underline"
               onClick={() => alert("Submit a library feature coming soon")}
             >
               Submit it ↗
@@ -42,47 +42,47 @@ const LibrariesGrid = (props: Props) => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredLibraries.map((lib) => {
             return (
               <Card
                 key={lib.name}
-                className="group border border-gray-100  hover:border-foreground/30  transition-all"
+                className="group hover:border-foreground/30 border border-gray-100 transition-all"
               >
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="space-y-3 p-4">
                   <div className="flex items-center justify-between">
                     <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center text-xs font-medium"
+                      className="flex h-9 w-9 items-center justify-center rounded-lg text-xs font-medium"
                       style={{ background: lib.bg, color: lib.fg }}
                     >
                       {lib.ltr}
                     </div>
                     <Badge
                       variant="secondary"
-                      className={`text-[10px] px-2 py-0 ${
+                      className={`px-2 py-0 text-[10px] ${
                         lib.badge === "popular"
                           ? "bg-emerald-50 text-emerald-700"
                           : lib.badge === "new"
                             ? "bg-primary/10 text-primary"
-                            : "bg-card text-card-foreground "
+                            : "bg-card text-card-foreground"
                       }`}
                     >
                       {lib.badge}
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium  ">{lib.name}</h3>
-                    <p className="text-xs   mt-1">{lib.desc}</p>
+                    <h3 className="text-sm font-medium">{lib.name}</h3>
+                    <p className="mt-1 text-xs">{lib.desc}</p>
                   </div>
                   <div className="flex items-center justify-between pt-1">
-                    <span className="text-[11px] font-mono text-muted-foreground">
+                    <span className="text-muted-foreground font-mono text-[11px]">
                       {lib.version}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 pt-1">
                     <Button
                       size="sm"
-                      className="flex-1 h-8 gap-1.5"
+                      className="h-8 flex-1 gap-1.5"
                       onClick={() => handleAsk(lib.name)}
                     >
                       <MessageCircle className="h-3.5 w-3.5" />

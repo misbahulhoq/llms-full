@@ -22,25 +22,25 @@ const steps = [
 const HowItWorks = () => {
   return (
     <div className="mb-8">
-      <h2 className="text-sm font-medium   mb-3">How it works</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <h2 className="mb-3 text-sm font-medium">How it works</h2>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {steps.map((item) => (
           <Card
             key={item.step}
-            className="border border-gray-100  bg-gray-50 dark:bg-gray-900/50"
+            className="border border-gray-100 bg-gray-50 dark:bg-gray-900/50"
           >
             <CardContent className="p-4">
-              <div className="w-6 h-6 rounded-full bg-white dark:bg-gray-800 border border-foreground/30 dark:border-gray-700 flex items-center justify-center text-[11px] font-medium text-gray-600  mb-2">
+              <div className="border-foreground/30 mb-2 flex h-6 w-6 items-center justify-center rounded-full border bg-white text-[11px] font-medium text-gray-600 dark:border-gray-700 dark:bg-gray-800">
                 {item.step}
               </div>
-              <h3 className="text-sm font-medium   mb-1">{item.title}</h3>
-              <p className="text-xs   leading-relaxed">{item.desc}</p>
+              <h3 className="mb-1 text-sm font-medium">{item.title}</h3>
+              <p className="text-xs leading-relaxed">{item.desc}</p>
               {item.step === "2" && (
-                <div className="flex gap-1.5 mt-3">
+                <div className="mt-3 flex gap-1.5">
                   {LLMS.map((llm) => (
                     <span
                       key={llm.id}
-                      className="text-[10px] px-2 py-0.5 rounded-full border border-foreground/30 dark:border-gray-700  "
+                      className="border-foreground/30 rounded-full border px-2 py-0.5 text-[10px] dark:border-gray-700"
                     >
                       {llm.name}
                     </span>

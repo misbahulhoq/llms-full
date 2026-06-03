@@ -36,12 +36,12 @@ const StatsBar = (props: Props) => {
   const currentLLM = LLMS.find((l) => l.id === selectedLLM)!;
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-foreground/20 pb-6 mb-6">
+    <div className="border-foreground/20 mb-6 flex flex-col items-center justify-between gap-4 border-b pb-6 sm:flex-row">
       <div className="flex items-center gap-6">
         {stats.map((stat) => (
           <div key={stat.label} className="text-center">
-            <div className="text-xl font-medium  ">{stat.value}</div>
-            <div className="text-[11px]  ">{stat.label}</div>
+            <div className="text-xl font-medium">{stat.value}</div>
+            <div className="text-[11px]">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -51,14 +51,14 @@ const StatsBar = (props: Props) => {
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
-            className="gap-2 border-foreground/30  bg-gray-50 dark:bg-gray-900"
+            className="border-foreground/30 gap-2 bg-gray-50 dark:bg-gray-900"
           >
             <span
-              className="w-2 h-2 rounded-full"
+              className="h-2 w-2 rounded-full"
               style={{ background: currentLLM.dot }}
             />
             <span>Ask with {currentLLM.name}</span>
-            <ChevronDown className="h-3.5 w-3.5 " />
+            <ChevronDown className="h-3.5 w-3.5" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-44">
@@ -66,11 +66,11 @@ const StatsBar = (props: Props) => {
             <DropdownMenuItem
               key={llm.id}
               onClick={() => changeLLM(llm.id)}
-              className="flex items-center justify-between gap-2 cursor-pointer"
+              className="flex cursor-pointer items-center justify-between gap-2"
             >
               <div className="flex items-center gap-2">
                 <span
-                  className="w-2 h-2 rounded-full"
+                  className="h-2 w-2 rounded-full"
                   style={{ background: llm.dot }}
                 />
                 <span>{llm.name}</span>

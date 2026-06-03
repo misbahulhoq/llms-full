@@ -2,35 +2,35 @@ import { Plus } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400">
+    <footer className="flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 text-xs text-gray-500 sm:flex-row dark:border-gray-800 dark:text-gray-400">
       <div className="flex gap-5">
         <a
           href="#"
-          className="hover:text-gray-900 dark:hover:text-gray-300 transition-colors"
+          className="transition-colors hover:text-gray-900 dark:hover:text-gray-300"
         >
           About
         </a>
         <a
           href="#"
-          className="hover:text-gray-900 dark:hover:text-gray-300 transition-colors"
+          className="transition-colors hover:text-gray-900 dark:hover:text-gray-300"
         >
           GitHub
         </a>
         <a
           href="#"
-          className="hover:text-gray-900 dark:hover:text-gray-300 transition-colors"
+          className="transition-colors hover:text-gray-900 dark:hover:text-gray-300"
         >
           API
         </a>
         <a
           href="#"
-          className="hover:text-gray-900 dark:hover:text-gray-300 transition-colors"
+          className="transition-colors hover:text-gray-900 dark:hover:text-gray-300"
         >
           Changelog
         </a>
       </div>
       <button
-        className="inline-flex items-center gap-1.5 text-xs text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-950 transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-950/50 dark:text-blue-400 dark:hover:bg-blue-950"
         onClick={() => alert("Submit a library - coming soon!")}
       >
         <Plus className="h-3 w-3" />

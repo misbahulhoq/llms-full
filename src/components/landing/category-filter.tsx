@@ -21,9 +21,9 @@ const CategoryFilter = (props: Props) => {
               key={cat.id}
               variant={isActive ? "default" : "outline"}
               size="sm"
-              className={`gap-1.5 rounded-full text-xs h-8 ${
+              className={`h-8 gap-1.5 rounded-full text-xs ${
                 isActive
-                  ? "bg-blue-50 dark:bg-blue-950 text-blue-700 border-blue-200"
+                  ? "border-blue-200 bg-blue-50 text-blue-700 dark:bg-blue-950"
                   : "border-foreground/30 text-gray-600"
               }`}
               onClick={() => setActiveCategory(cat.id)}
