@@ -32,6 +32,7 @@ const ThemeToggle = dynamic(
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const NAV_LINKS: NavLink[] = [
+  { label: "Docs", href: "/docs" },
   { label: "Libraries", href: "/libraries" },
   { label: "Categories", href: "/categories" },
   { label: "Changelog", href: "/changelog" },
@@ -46,6 +47,7 @@ export default function Navbar() {
 
   // Close mobile menu on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileOpen(false);
   }, [pathname]);
 
@@ -120,7 +122,7 @@ export default function Navbar() {
               aria-label="View source on GitHub"
             >
               <a
-                href="https://github.com"
+                href="https://github.com/misbahulhoq/llms-full"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-background text-foreground"
