@@ -20,7 +20,7 @@ export async function getLibraryContent(
 
   const filePath = path.join(
     process.cwd(),
-    "src",
+    "public",
     "content",
     library,
     version,
