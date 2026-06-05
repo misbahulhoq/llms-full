@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown } from "lucide-react";
 import { LLMId, LLMS } from "@/lib/constants";
-import Image from "next/image";
+import { SVGImage } from "../shared/svg-image";
 
 // Stats data
 const stats = [
@@ -59,26 +59,26 @@ const StatsBar = (props: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-44">
-          {LLMS.map((llm) => (
-            <DropdownMenuItem
-              key={llm.id}
-              onClick={() => changeLLM(llm.id)}
-              className="flex cursor-pointer items-center justify-between gap-2"
-            >
-              <div className="flex items-center gap-2">
-                <Image
-                  src={llm.logoUrl}
-                  alt={llm.name}
-                  width={20}
-                  height={20}
-                />
-                <span>{llm.name}</span>
-              </div>
-              {selectedLLM === llm.id && (
-                <Check className="h-3.5 w-3.5 text-blue-600" />
-              )}
-            </DropdownMenuItem>
-          ))}
+          {LLMS.map((llm) => {
+            return (
+              <DropdownMenuItem
+                key={llm.id}
+                onClick={() => changeLLM(llm.id)}
+                className="flex cursor-pointer items-center justify-between gap-2"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="">
+                    <SVGImage src={llm.logoUrl} alt={llm.name} />
+                  </span>
+
+                  <span>{llm.name}</span>
+                </div>
+                {selectedLLM === llm.id && (
+                  <Check className="h-3.5 w-3.5 text-blue-600" />
+                )}
+              </DropdownMenuItem>
+            );
+          })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
