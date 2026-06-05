@@ -1,31 +1,15 @@
-import MarkDownRenderer from "@/components/shared/markdown-renderer";
-import { libraryInfo } from "@/content/library-info";
 import { getLibraryContent } from "@/app/actions";
-import { Button } from "@/components/ui/button";
+import LibraryPageClient from "./library-page-client";
 
 const LibraryPage = async ({ libraryName }: { libraryName: string }) => {
-  const activeLibraryInfo = libraryInfo.filter((library) => {
-    return library.name === libraryName;
-  });
-  const activeLibraryVersions = activeLibraryInfo[0]?.versions;
-
-  const activeLibraryMdContent = await getLibraryContent(libraryName, "16.2.6");
-
-  console.log(activeLibraryInfo);
-  console.log(libraryName);
-
-  return (
-    <div>
-      <div className="rounded border p-4">
-        <section className="flex items-center gap-4">
-          <Button size="sm">Raw</Button>
-          <Button size="sm">Preview</Button>
-        </section>
-
-        <MarkDownRenderer content={activeLibraryMdContent} />
-      </div>
-    </div>
+  // NOTE: Hardcoding version and percentage for now
+  const activeLibraryMdContent = await getLibraryContent(
+    libraryName,
+    "16.2.6",
+    0.05,
   );
+
+  return <LibraryPageClient markdownContent={activeLibraryMdContent} />;
 };
 
 export default LibraryPage;

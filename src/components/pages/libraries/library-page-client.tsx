@@ -1,27 +1,32 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MarkDownRenderer from "@/components/shared/markdown-renderer";
-import { libraryInfo } from "@/content/library-info";
-import { getLibraryContent } from "@/app/actions";
 
-const LibraryPageClient = () => {
-  const pathName = usePathname();
-  const libraryName = pathName.split("/")[2];
-  const version = pathName.split("/")[3];
+interface LibraryPageClientProps {
+  markdownContent: string;
+}
 
-  const activeLibraryInfo = libraryInfo.filter((library) => {
-    return library.name === libraryName;
-  });
-  const activeLibraryVersions = activeLibraryInfo[0].versions;
+const LibraryPageClient = ({ markdownContent }: LibraryPageClientProps) => {
+  return (
+    <div className="rounded border p-4">
+      <Tabs defaultValue="raw" className="">
+        <TabsList>
+          <TabsTrigger value="raw">Raw</TabsTrigger>
+          <TabsTrigger value="preview">Preview</TabsTrigger>
+        </TabsList>
 
-  const activeLibraryMdContent = getLibraryContent(libraryName, "16.2.6");
-
-  console.log(activeLibraryInfo);
-  console.log(libraryName);
-  console.log(version);
-
-  return <MarkDownRenderer content={activeLibraryMdContent} />;
+        <TabsContent value="raw">
+          <pre className="bg-secondary rounded p-4 font-mono text-sm break-words whitespace-pre-wrap">
+            <code>{markdownContent}</code>
+          </pre>
+        </TabsContent>
+        <TabsContent value="preview">
+          <MarkDownRenderer content={markdownContent} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
 };
 
 export default LibraryPageClient;

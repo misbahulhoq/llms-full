@@ -8,15 +8,15 @@ import path from "node:path";
  * Reads a specific percentage of a file from the beginning.
  * @param library The library folder name
  * @param version The version folder name
- * @param percentage A number between 1 and 100
+ * @param percentage A positive number between 0.001 and 100
  */
 export async function getLibraryContent(
   library: string,
   version: string,
   percentage?: number,
 ) {
-  // 1. Sanitize and clamp the percentage input between 1 and 100
-  const safePercentage = Math.min(Math.max(percentage || 5, 1), 100);
+  // 1. Sanitize and clamp the percentage input between 0.001 and 100
+  const safePercentage = Math.min(Math.max(percentage || 5, 0.001), 100);
 
   const filePath = path.join(
     process.cwd(),
