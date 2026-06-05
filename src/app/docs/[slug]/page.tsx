@@ -10,7 +10,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
 
   return (
-    <div>
+    <div className="px-5 py-6">
       <Suspense fallback={<div>Loading...</div>}>
         <LibraryPage libraryName={slug} />
       </Suspense>
