@@ -39,7 +39,6 @@ const LibraryPageClient = ({ markdownContent }: LibraryPageClientProps) => {
       {/* Header part */}
       <section className="mb-5 flex items-center justify-between">
         <h2>Library name and Version Goes Here</h2>
-
         <div className="flex items-center gap-3">
           <Button variant="outline" className="">
             Version
@@ -63,7 +62,7 @@ const LibraryPageClient = ({ markdownContent }: LibraryPageClientProps) => {
                   </DropdownMenuItem>
 
                   {llms.map((llm) => {
-                    const { id, logoUrl, name, url } = llm;
+                    const { id, logoUrl, name } = llm;
                     return (
                       <DropdownMenuItem
                         key={id}
@@ -88,6 +87,7 @@ const LibraryPageClient = ({ markdownContent }: LibraryPageClientProps) => {
           </ButtonGroup>
         </div>
       </section>
+
       <Tabs defaultValue="raw" className="">
         <TabsList>
           <TabsTrigger value="raw">Raw</TabsTrigger>

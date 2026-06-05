@@ -8,7 +8,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  allowedDevOrigins: ["192.168.31.27"],
+  allowedDevOrigins: [
+    process.env.ALLOWED_DEV_ORIGINS || "http://localhost:3000",
+  ],
 };
 
 export default nextConfig;
