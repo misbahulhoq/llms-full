@@ -1,6 +1,6 @@
-import LibraryPage from "@/components/pages/libraries";
-import { libraries } from "@/lib/libraries";
 import { Suspense } from "react";
+import DocsPage from "@/components/pages/docs";
+import { libraries } from "@/lib/libraries";
 
 export const generateStaticParams = () => {
   return libraries.map((library) => ({ slug: `${library.slug}` }));
@@ -12,7 +12,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   return (
     <div className="px-5 py-6">
       <Suspense fallback={<div>Loading...</div>}>
-        <LibraryPage libraryName={slug} />
+        <DocsPage libraryName={slug} />
       </Suspense>
     </div>
   );

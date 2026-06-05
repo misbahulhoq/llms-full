@@ -1,5 +1,5 @@
 import { getLibraryContent } from "@/app/actions";
-import LibraryPageClient from "./library-page-client";
+import LibraryPageClient from "./docs-page-client";
 
 const LibraryPage = async ({ libraryName }: { libraryName: string }) => {
   // NOTE: Hardcoding version and percentage for now

@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
 import { ChevronDown, Copy } from "lucide-react";
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -13,8 +15,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import MarkDownRenderer from "@/components/shared/markdown-renderer";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 interface LibraryPageClientProps {
   markdownContent: string;
