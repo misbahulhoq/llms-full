@@ -1,15 +1,93 @@
 "use client";
 
+import { ChevronDown, Copy } from "lucide-react";
+import { ButtonGroup } from "@/components/ui/button-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import MarkDownRenderer from "@/components/shared/markdown-renderer";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface LibraryPageClientProps {
   markdownContent: string;
 }
 
+const llms = [
+  {
+    id: "chatgpt",
+    name: "ChatGPT",
+    url: "https://chatgpt.com/",
+    logoUrl: "/icons/llm/chatgpt.svg",
+  },
+  {
+    id: "claude",
+    name: "Claude",
+    url: "https://claude.ai/",
+    logoUrl: "/icons/llm/claude.svg",
+  },
+];
+
 const LibraryPageClient = ({ markdownContent }: LibraryPageClientProps) => {
   return (
-    <div className="rounded border p-4">
+    <div className="">
+      {/* Header part */}
+      <section className="mb-5 flex items-center justify-between">
+        <h2>Library name and Version Goes Here</h2>
+
+        <div className="flex items-center gap-3">
+          <Button variant="outline" className="">
+            Version
+          </Button>
+
+          <ButtonGroup>
+            <Button variant="outline" className="">
+              <Copy /> Copy Prompt
+            </Button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuGroup className="space-y-1">
+                  <DropdownMenuItem className="cursor-pointer py-2">
+                    <Copy /> Copy Doc Url
+                  </DropdownMenuItem>
+
+                  {llms.map((llm) => {
+                    const { id, logoUrl, name, url } = llm;
+                    return (
+                      <DropdownMenuItem
+                        key={id}
+                        className="my-2 cursor-pointer flex-col items-start gap-1 py-2"
+                      >
+                        <span className="flex items-center gap-2">
+                          <Image
+                            src={logoUrl}
+                            alt={name}
+                            height={16}
+                            width={16}
+                          />
+                          Open in {name}
+                        </span>
+                        <span>Ask questions about this page.</span>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ButtonGroup>
+        </div>
+      </section>
       <Tabs defaultValue="raw" className="">
         <TabsList>
           <TabsTrigger value="raw">Raw</TabsTrigger>
