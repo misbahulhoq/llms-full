@@ -1,29 +1,122 @@
-export const libraries = [
+interface LibraryInfo {
+  name: string;
+  slug: string;
+  category: string;
+  versions: string[] | null;
+  badge?: string;
+}
+
+export const libraries: LibraryInfo[] = [
   // Meta Frameworks
-  { name: "Next.js", slug: "nextjs", category: "meta", badge: "popular" },
-  { name: "Nuxt", slug: "nuxt", category: "meta", badge: "popular" },
-  { name: "SvelteKit", slug: "sveltekit", category: "meta", badge: "popular" },
-  { name: "Remix", slug: "remix", category: "meta", badge: "stable" },
-  { name: "Astro", slug: "astro", category: "meta", badge: "new" },
+  {
+    name: "Next.js",
+    slug: "nextjs",
+    category: "meta",
+    badge: "popular",
+    versions: ["16.2.6", "16.2.7"],
+  },
+  {
+    name: "Nuxt",
+    slug: "nuxt",
+    category: "meta",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "SvelteKit",
+    slug: "sveltekit",
+    category: "meta",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Remix",
+    slug: "remix",
+    category: "meta",
+    badge: "stable",
+    versions: null,
+  },
+  {
+    name: "Astro",
+    slug: "astro",
+    category: "meta",
+    badge: "new",
+    versions: null,
+  },
 
   // UI Frameworks
-  { name: "React", slug: "react", category: "ui", badge: "popular" },
-  { name: "Vue", slug: "vue", category: "ui", badge: "popular" },
-  { name: "Svelte", slug: "svelte", category: "ui", badge: "popular" },
-  { name: "Angular", slug: "angular", category: "ui", badge: "popular" },
-  { name: "Solid", slug: "solid", category: "ui", badge: "new" },
+  {
+    name: "React",
+    slug: "react",
+    category: "ui",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Vue",
+    slug: "vue",
+    category: "ui",
+    badge: "popular",
+    versions: ["3"],
+  },
+  {
+    name: "Svelte",
+    slug: "svelte",
+    category: "ui",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Angular",
+    slug: "angular",
+    category: "ui",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Solid",
+    slug: "solid",
+    category: "ui",
+    badge: "new",
+    versions: null,
+  },
 
   // State Management
-  { name: "Zustand", slug: "zustand", category: "state", badge: "popular" },
+  {
+    name: "Zustand",
+    slug: "zustand",
+    category: "state",
+    badge: "popular",
+    versions: null,
+  },
   {
     name: "Redux Toolkit",
     slug: "redux-toolkit",
     category: "state",
     badge: "popular",
+    versions: null,
   },
-  { name: "Jotai", slug: "jotai", category: "state", badge: "new" },
-  { name: "Pinia", slug: "pinia", category: "state", badge: "popular" },
-  { name: "MobX", slug: "mobx", category: "state", badge: "stable" },
+  {
+    name: "Jotai",
+    slug: "jotai",
+    category: "state",
+    badge: "new",
+    versions: null,
+  },
+  {
+    name: "Pinia",
+    slug: "pinia",
+    category: "state",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "MobX",
+    slug: "mobx",
+    category: "state",
+    badge: "stable",
+    versions: null,
+  },
 
   // Data Fetching
   {
@@ -31,37 +124,112 @@ export const libraries = [
     slug: "tanstack-query",
     category: "fetching",
     badge: "popular",
+    versions: null,
   },
-  { name: "Axios", slug: "axios", category: "fetching", badge: "popular" },
-  { name: "SWR", slug: "swr", category: "fetching", badge: "popular" },
-  { name: "tRPC", slug: "trpc", category: "fetching", badge: "new" },
+  {
+    name: "Axios",
+    slug: "axios",
+    category: "fetching",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "SWR",
+    slug: "swr",
+    category: "fetching",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "tRPC",
+    slug: "trpc",
+    category: "fetching",
+    badge: "new",
+    versions: null,
+  },
   {
     name: "Apollo Client",
     slug: "apollo-client",
     category: "fetching",
     badge: "stable",
+    versions: null,
   },
 
   // Build Tools
-  { name: "Vite", slug: "vite", category: "build", badge: "popular" },
-  { name: "Turbopack", slug: "turbopack", category: "build", badge: "new" },
-  { name: "esbuild", slug: "esbuild", category: "build", badge: "stable" },
+  {
+    name: "Vite",
+    slug: "vite",
+    category: "build",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Turbopack",
+    slug: "turbopack",
+    category: "build",
+    badge: "new",
+    versions: null,
+  },
+  {
+    name: "esbuild",
+    slug: "esbuild",
+    category: "build",
+    badge: "stable",
+    versions: null,
+  },
 
   // Testing
-  { name: "Vitest", slug: "vitest", category: "testing", badge: "popular" },
+  {
+    name: "Vitest",
+    slug: "vitest",
+    category: "testing",
+    badge: "popular",
+    versions: null,
+  },
   {
     name: "Playwright",
     slug: "playwright",
     category: "testing",
     badge: "popular",
+    versions: null,
   },
-  { name: "Jest", slug: "jest", category: "testing", badge: "popular" },
+  {
+    name: "Jest",
+    slug: "jest",
+    category: "testing",
+    badge: "popular",
+    versions: null,
+  },
 
   // Utilities
-  { name: "Zod", slug: "zod", category: "utils", badge: "popular" },
-  { name: "Lodash", slug: "lodash", category: "utils", badge: "stable" },
-  { name: "date-fns", slug: "date-fns", category: "utils", badge: "stable" },
-  { name: "Radix UI", slug: "radix-ui", category: "utils", badge: "popular" },
+  {
+    name: "Zod",
+    slug: "zod",
+    category: "utils",
+    badge: "popular",
+    versions: null,
+  },
+  {
+    name: "Lodash",
+    slug: "lodash",
+    category: "utils",
+    badge: "stable",
+    versions: null,
+  },
+  {
+    name: "date-fns",
+    slug: "date-fns",
+    category: "utils",
+    badge: "stable",
+    versions: null,
+  },
+  {
+    name: "Radix UI",
+    slug: "radix-ui",
+    category: "utils",
+    badge: "popular",
+    versions: null,
+  },
 ];
 
 export const librariesCount = libraries.length;

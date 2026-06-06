@@ -111,7 +111,7 @@ export default function Navbar() {
               <Suspense fallback={<span className="sr-only">GitHub</span>}>
                 <SVGImage
                   alt="GitHub"
-                  className="h-7 w-7"
+                  className="h-6 w-6"
                   src="/icons/github.svg"
                 />
               </Suspense>

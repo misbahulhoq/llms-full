@@ -17,7 +17,7 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon-sm">
           {theme === "system" && (
             <Monitor className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all" />
           )}

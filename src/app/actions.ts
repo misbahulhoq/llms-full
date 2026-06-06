@@ -21,7 +21,7 @@ export async function getLibraryContent(
   const filePath = path.join(
     process.cwd(),
     "public",
-    "content",
+    "docs",
     library,
     version,
     "full.md",
