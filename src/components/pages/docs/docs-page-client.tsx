@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronDown, Copy } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -44,6 +44,7 @@ const LibraryPageClient = ({
   librarySlug,
   version,
 }: LibraryPageClientProps) => {
+  const pathName = usePathname();
   const router = useRouter();
   const [isCopied, setIsCopied] = useState(false);
   const activeLibrary = libraries.find((lib) => lib.slug === librarySlug);
@@ -58,8 +59,11 @@ const LibraryPageClient = ({
   };
 
   const handleVersionChange = (targetVersion: string) => {
-    // Navigates purely on the client side to the newly selected version page
-    router.push(`/docs/${librarySlug}/${targetVersion}`);
+    const urlParts = pathName.split("/"); // convert '/docs/nextjs/index/16.2.7' to ['docs', 'nextjs', 'index', '16.2.7']
+    const navigateTo =
+      urlParts.slice(0, urlParts.length - 1).join("/") + `/${targetVersion}`;
+
+    router.push(navigateTo);
   };
 
   return (

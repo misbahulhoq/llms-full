@@ -186,7 +186,7 @@ export default function LandingPage() {
         <HowItWorks />
 
         {/* Recent Updates */}
-        <RecentUpdates />
+        <RecentUpdates selectedLLM={selectedLLM} />
       </div>
     </div>
   );
