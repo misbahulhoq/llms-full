@@ -17,6 +17,7 @@ import { libraries } from "@/lib/libraries";
 const Sidebar = () => {
   const pathName = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   return (
     <aside
@@ -39,39 +40,57 @@ const Sidebar = () => {
         {libraries.map((library) => {
           const latestVersion = library.versions
             ? library.versions[library.versions.length - 1]
-            : null;
+            : "";
           const isAccordion = library.docs && library.docs.length > 1;
 
-          const href = `/docs/${library.slug}${
-            latestVersion ? `/${latestVersion}` : ""
-          }`;
+          const href = isAccordion
+            ? ""
+            : `/docs/${library.slug}${
+                latestVersion ? `/${latestVersion}` : ""
+              }`;
           const isActive = pathName === href;
+          const accordionParentHref = `/docs/${library.slug}`;
+          const isAccordionParentActive = pathName === accordionParentHref;
 
           if (isAccordion) {
             return (
-              <Accordion key={library.slug} type="single" collapsible>
+              <Accordion
+                key={library.slug}
+                type="single"
+                collapsible
+                value={isAccordionOpen ? library.slug : ""}
+                onValueChange={(val) =>
+                  setIsAccordionOpen(val === library.slug)
+                }
+              >
                 <AccordionItem value={library.slug}>
-                  <AccordionTrigger
-                    iconAlignment="horizontal"
-                    className="pr-6 text-base"
-                    // asChild
-                  >
+                  <div className="flex items-center">
                     <Link
-                      className="block w-full pr-6 pl-6"
-                      href={`/docs/${library.slug}`}
+                      href={accordionParentHref}
+                      onClick={() => setIsAccordionOpen((prev) => !prev)}
+                      className={`block w-full pr-6 pl-6 ${isAccordionParentActive ? "text-primary font-semibold" : ""}`}
                     >
                       {library.name}
                     </Link>
-                  </AccordionTrigger>
+
+                    <AccordionTrigger
+                      iconAlignment="horizontal"
+                      className="pr-6 text-base"
+                    ></AccordionTrigger>
+                  </div>
 
                   <AccordionContent>
                     {library.docs?.map((doc) => {
+                      const accordionChildHref = `/docs/${library.slug}/${doc}/${latestVersion}`;
+                      const isAccordionChildActive =
+                        pathName === accordionChildHref;
                       return (
                         <Link
                           key={doc}
-                          href={`/docs/${library.slug}/${doc}`}
-                          className={`block py-2 pl-7 capitalize ${
-                            isActive && "text-primary font-semibold"
+                          href={accordionChildHref}
+                          className={`my-1 block py-2.5 pl-7 capitalize ${
+                            isAccordionChildActive &&
+                            "text-primary font-semibold"
                           }`}
                         >
                           {doc}

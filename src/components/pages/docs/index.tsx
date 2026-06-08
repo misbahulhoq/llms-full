@@ -1,5 +1,5 @@
 import { getLibraryContent } from "@/app/actions";
-import LibraryPageClient from "./docs-page-client";
+import DocsPageClient from "./docs-page-client";
 
 const DocsPage = async ({
   librarySlug,
@@ -11,11 +11,11 @@ const DocsPage = async ({
   const activeLibraryMdContent = await getLibraryContent(
     librarySlug,
     version,
-    0.2,
+    0.2, // percentage
   );
 
   return (
-    <LibraryPageClient
+    <DocsPageClient
       markdownContent={activeLibraryMdContent}
       librarySlug={librarySlug}
       version={version}
