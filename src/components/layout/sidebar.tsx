@@ -5,20 +5,12 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
 import { libraries } from "@/lib/libraries";
 import SidebarAccordion from "./sidebar-accordion";
 
 const Sidebar = () => {
   const pathName = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   return (
     <aside
@@ -52,18 +44,9 @@ const Sidebar = () => {
                   latestVersion ? `/${latestVersion}` : ""
                 }`;
             const isActive = pathName === href;
-            const accordionParentHref = `/docs/${library.slug}`;
-            const isAccordionParentActive = pathName === accordionParentHref;
 
             if (isAccordion) {
-              return (
-                <SidebarAccordion
-                  key={library.slug}
-                  accordionParentHref={accordionParentHref}
-                  isAccordionParentActive={isAccordionParentActive}
-                  library={library}
-                />
-              );
+              return <SidebarAccordion key={library.slug} library={library} />;
             }
 
             return (
