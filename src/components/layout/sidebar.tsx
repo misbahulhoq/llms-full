@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { libraries } from "@/lib/libraries";
+import SidebarAccordion from "./sidebar-accordion";
 
 const Sidebar = () => {
   const pathName = usePathname();
@@ -37,85 +38,47 @@ const Sidebar = () => {
       </button>
 
       <div className={`${menuOpen ? "block" : "hidden"} mt-4 md:block lg:mt-0`}>
-        {libraries.map((library) => {
-          const latestVersion = library.versions
-            ? library.versions[library.versions.length - 1]
-            : "";
-          const isAccordion = library.docs && library.docs.length > 1;
+        {libraries
+          .filter((lib) => lib.versions !== null)
+          .map((library) => {
+            const latestVersion = library.versions
+              ? library.versions[library.versions.length - 1]
+              : "";
+            const isAccordion = library.docs && library.docs.length > 1;
 
-          const href = isAccordion
-            ? ""
-            : `/docs/${library.slug}${
-                latestVersion ? `/${latestVersion}` : ""
-              }`;
-          const isActive = pathName === href;
-          const accordionParentHref = `/docs/${library.slug}`;
-          const isAccordionParentActive = pathName === accordionParentHref;
+            const href = isAccordion
+              ? ""
+              : `/docs/${library.slug}${
+                  latestVersion ? `/${latestVersion}` : ""
+                }`;
+            const isActive = pathName === href;
+            const accordionParentHref = `/docs/${library.slug}`;
+            const isAccordionParentActive = pathName === accordionParentHref;
 
-          if (isAccordion) {
+            if (isAccordion) {
+              return (
+                <SidebarAccordion
+                  key={library.slug}
+                  accordionParentHref={accordionParentHref}
+                  isAccordionParentActive={isAccordionParentActive}
+                  library={library}
+                />
+              );
+            }
+
             return (
-              <Accordion
+              <Link
                 key={library.slug}
-                type="single"
-                collapsible
-                value={isAccordionOpen ? library.slug : ""}
-                onValueChange={(val) =>
-                  setIsAccordionOpen(val === library.slug)
-                }
+                href={href}
+                onClick={() => setMenuOpen(false)}
+                className={`my-2 block py-3 pr-6 pl-6 font-light md:my-1.5 md:py-2 ${
+                  isActive && "text-primary font-semibold"
+                }`}
               >
-                <AccordionItem value={library.slug}>
-                  <div className="flex items-center">
-                    <Link
-                      href={accordionParentHref}
-                      onClick={() => setIsAccordionOpen((prev) => !prev)}
-                      className={`block w-full pr-6 pl-6 ${isAccordionParentActive ? "text-primary font-semibold" : ""}`}
-                    >
-                      {library.name}
-                    </Link>
-
-                    <AccordionTrigger
-                      iconAlignment="horizontal"
-                      className="pr-6 text-base"
-                    ></AccordionTrigger>
-                  </div>
-
-                  <AccordionContent>
-                    {library.docs?.map((doc) => {
-                      const accordionChildHref = `/docs/${library.slug}/${doc}/${latestVersion}`;
-                      const isAccordionChildActive =
-                        pathName === accordionChildHref;
-                      return (
-                        <Link
-                          key={doc}
-                          href={accordionChildHref}
-                          className={`my-1 block py-2.5 pl-7 capitalize ${
-                            isAccordionChildActive &&
-                            "text-primary font-semibold"
-                          }`}
-                        >
-                          {doc}
-                        </Link>
-                      );
-                    })}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                {library.name}
+              </Link>
             );
-          }
-
-          return (
-            <Link
-              key={library.slug}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className={`my-2 block py-3 pr-6 pl-6 font-light md:my-1.5 md:py-2 ${
-                isActive && "text-primary font-semibold"
-              }`}
-            >
-              {library.name}
-            </Link>
-          );
-        })}
+          })}
       </div>
     </aside>
   );

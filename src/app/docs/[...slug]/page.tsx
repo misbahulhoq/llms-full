@@ -3,25 +3,29 @@ import { libraries } from "@/lib/libraries";
 export const generateStaticParams = () => {
   const paths: { slug: string[] }[] = [];
 
-  libraries.forEach((library) => {
-    const docList =
-      library.docs && library.docs.length > 0 ? library.docs : ["full"];
+  libraries
+    .filter((lib) => lib.versions !== null)
+    .forEach((library) => {
+      const docList =
+        library.docs && library.docs.length > 0 ? library.docs : null;
 
-    const versionList =
-      library.versions && library.versions.length > 0 ? library.versions : null;
+      const versionList =
+        library.versions && library.versions.length > 0
+          ? library.versions
+          : null;
 
-    docList.forEach((doc) => {
-      versionList?.forEach((version) => {
-        paths.push({
-          slug: [library.slug, doc, version],
+      paths.push({
+        slug: [library.slug],
+      });
+
+      docList?.forEach((doc) => {
+        versionList?.forEach((version) => {
+          paths.push({
+            slug: [library.slug, doc, version],
+          });
         });
       });
     });
-
-    paths.push({
-      slug: library.docs ? library.docs.map((doc) => doc) : [library.slug],
-    });
-  });
 
   return paths;
 };

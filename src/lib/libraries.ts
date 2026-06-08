@@ -1,4 +1,4 @@
-interface LibraryInfo {
+export interface LibraryInfo {
   name: string;
   slug: string;
   category: string;
@@ -20,16 +20,18 @@ export const libraries: LibraryInfo[] = [
   {
     name: "Nuxt",
     slug: "nuxt",
+    docs: ["index", "full"],
     category: "meta",
     badge: "popular",
-    versions: null,
+    versions: ["4"],
   },
   {
-    name: "SvelteKit",
-    slug: "sveltekit",
+    name: "Svelte",
+    slug: "svelte",
+    docs: ["index", "small", "medium", "full"],
     category: "meta",
     badge: "popular",
-    versions: null,
+    versions: ["5"],
   },
   {
     name: "Remix",
@@ -57,16 +59,10 @@ export const libraries: LibraryInfo[] = [
   {
     name: "Vue",
     slug: "vue",
+    docs: ["index", "full"],
     category: "ui",
     badge: "popular",
     versions: ["3"],
-  },
-  {
-    name: "Svelte",
-    slug: "svelte",
-    category: "ui",
-    badge: "popular",
-    versions: null,
   },
   {
     name: "Angular",
@@ -87,9 +83,10 @@ export const libraries: LibraryInfo[] = [
   {
     name: "Zustand",
     slug: "zustand",
+    docs: ["index", "full"],
     category: "state",
     badge: "popular",
-    versions: null,
+    versions: ["5"],
   },
   {
     name: "Redux Toolkit",
@@ -234,4 +231,4 @@ export const libraries: LibraryInfo[] = [
   },
 ];
 
-export const librariesCount = libraries.length;
+export const librariesCount = libraries.filter((lib) => !lib.versions).length;
