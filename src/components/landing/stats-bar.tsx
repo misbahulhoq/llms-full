@@ -15,8 +15,6 @@ import { SVGImage } from "../shared/svg-image";
 const stats = [
   { label: "Libraries", value: "142" },
   { label: "Categories", value: "38" },
-  { label: "Tokens served", value: "4.2M" },
-  { label: "Daily", value: "Updates" },
 ];
 
 type Props = {

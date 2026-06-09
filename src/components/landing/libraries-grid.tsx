@@ -1,12 +1,12 @@
 import { MessageCircle } from "lucide-react";
-import { Library, LLMId, LLMS } from "@/lib/constants";
-import { Badge } from "@/components/ui/badge";
+import { LLMId, LLMS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { buildLLMUrl } from "@/lib/helpers";
+import { LibraryInfo } from "@/lib/libraries";
 
 type Props = {
-  filteredLibraries: Library[];
+  filteredLibraries: LibraryInfo[];
   selectedLLM: LLMId;
 };
 
@@ -25,7 +25,6 @@ const LibrariesGrid = (props: Props) => {
       <div className="mb-3 flex items-center justify-between">
         <div>
           <h2 className="text-sm font-medium">Popular libraries</h2>
-          <p className="text-xs">Most asked this week</p>
         </div>
       </div>
 
@@ -50,33 +49,13 @@ const LibrariesGrid = (props: Props) => {
                 className="group hover:border-foreground/30 border border-gray-100 transition-all"
               >
                 <CardContent className="space-y-3 p-4">
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-xs font-medium"
-                      style={{ background: lib.bg, color: lib.fg }}
-                    >
-                      {lib.ltr}
-                    </div>
-                    <Badge
-                      variant="secondary"
-                      className={`px-2 py-0 text-[10px] ${
-                        lib.badge === "popular"
-                          ? "bg-emerald-50 text-emerald-700"
-                          : lib.badge === "new"
-                            ? "bg-primary/10 text-primary"
-                            : "bg-card text-card-foreground"
-                      }`}
-                    >
-                      {lib.badge}
-                    </Badge>
-                  </div>
+                  <div className="flex items-center justify-between"></div>
                   <div>
                     <h3 className="text-sm font-medium">{lib.name}</h3>
-                    <p className="mt-1 text-xs">{lib.desc}</p>
                   </div>
                   <div className="flex items-center justify-between pt-1">
                     <span className="text-muted-foreground font-mono text-[11px]">
-                      {lib.version}
+                      {lib.versions && lib.versions[lib.versions.length - 1]}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 pt-1">

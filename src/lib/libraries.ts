@@ -1,3 +1,15 @@
+export const LIBRARY_CATEGORIES = [
+  "ui",
+  "meta",
+  "state",
+  "fetching",
+  "utils",
+  "testing",
+  "build",
+] as const;
+
+export type LibraryCategory = (typeof LIBRARY_CATEGORIES)[number];
+
 export interface LibraryInfo {
   name: string;
   slug: string;

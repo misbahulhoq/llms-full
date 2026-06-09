@@ -10,17 +10,6 @@ import {
 
 export const baseUrl = "";
 
-export interface Library {
-  name: string;
-  desc: string;
-  version: string;
-  cat: string;
-  badge: "popular" | "new" | "stable";
-  bg: string;
-  fg: string;
-  ltr: string;
-}
-
 export interface RecentItem {
   name: string;
   tag: string;
