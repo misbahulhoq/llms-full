@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { githubUrl } from "@/lib/constants";
 
 const Footer = () => {
   return (
@@ -16,7 +17,7 @@ const Footer = () => {
             About
           </Link>
           <a
-            href="https://github.com/misbahulhoq/llms-full"
+            href={githubUrl}
             target="_blank"
             className="transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           >

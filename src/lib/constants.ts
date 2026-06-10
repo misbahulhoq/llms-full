@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 export const baseUrl = "";
+export const githubUrl = "https://github.com/misbahulhoq/llm-docs";
 
 export interface RecentItem {
   name: string;

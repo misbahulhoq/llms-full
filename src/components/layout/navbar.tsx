@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { SVGImage } from "@/components/shared/svg-image";
+import { githubUrl } from "@/lib/constants";
 
 interface NavLink {
   label: string;
@@ -103,7 +104,7 @@ export default function Navbar() {
           <div className="flex flex-shrink-0 items-center gap-3">
             {/* GitHub */}
             <a
-              href="https://github.com/misbahulhoq/llm-docs"
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-background text-foreground"
