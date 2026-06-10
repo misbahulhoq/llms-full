@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useState, useEffect, Suspense } from "react";
 import { usePathname } from "next/navigation";
 import { Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { BASE_PATH, cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { SVGImage } from "@/components/shared/svg-image";
@@ -64,7 +64,7 @@ export default function Navbar() {
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-md">
               <Image
-                src="/logo_transparent.svg"
+                src={`${BASE_PATH}/logo_transparent.svg`}
                 alt="LLM Full"
                 height={50}
                 width={50}
