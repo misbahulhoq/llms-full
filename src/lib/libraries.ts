@@ -60,6 +60,17 @@ export const libraries: LibraryInfo[] = [
     versions: ["3"],
   },
 
+  // UI Component Libraries
+  {
+    name: "TailwindCSS",
+    slug: "tailwindcss",
+    iconName: "tailwind.svg",
+    docs: ["full"],
+    category: "ui",
+    badge: "popular",
+    versions: ["4"],
+  },
+
   // State Management
   {
     name: "Zustand",

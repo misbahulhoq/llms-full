@@ -58,6 +58,7 @@ const LibrariesGrid = (props: Props) => {
                       alt={lib.name + " icon"}
                       height={42}
                       width={42}
+                      className=""
                     />
                   </div>
                   <div>
